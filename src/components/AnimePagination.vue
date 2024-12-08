@@ -87,7 +87,10 @@
         return Array.from({length: end-start+1}, (_, i) => start+i);
     });
 
-    // Cambiar de página
+    /**
+     * Cambiar de página
+     * @param {number} page - El número de la página
+     */
     const goToPage = (page) => {
         if(page >= 1 && page <= props.totalPages){
             emit('onpagechanged', page);

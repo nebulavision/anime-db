@@ -3,6 +3,9 @@
   * -----------------
   * Componente que muestra una lista de tarjetas de anime, permite filtrar por género y paginar los resultados.
   *
+  * Props:
+  * - searchData (string): String con el texto introducido por el usuario en la barra de búsqueda
+  *
   * Ejemplo de uso:
   * <AnimeContainer />
   *
