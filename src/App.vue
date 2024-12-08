@@ -27,7 +27,7 @@ const onSearch = (query) => {
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;500;600;700&display=swap');
 
 #header {
-  background-image: url('../banner.jpg');
+  background-image: url('../public/banner.jpg');
   background-size: cover;
   background-position: -5px;
   opacity: 0.9;
