@@ -2,13 +2,17 @@
   <header id="header">
     <h1>Anime DB</h1>
   </header>
-  <main></main>
+  <main>
+    <AnimeContainer />
+  </main>
   <footer id="footer">
     <p>Bruno Díaz Martín - 2024</p>
   </footer>
 </template>
 
-<script setup></script>
+<script setup>
+import AnimeContainer from './components/AnimeContainer.vue';
+</script>
 
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;500;600;700&display=swap');
