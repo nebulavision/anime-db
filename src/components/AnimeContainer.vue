@@ -12,7 +12,7 @@
 <template>
   <article>
     <header id="container-header">
-      <Tag
+      <GenreTag
         v-for="genre in genres"
         :key="genre.id"
         :text="genre.name"
@@ -46,6 +46,7 @@
 import { ref, onMounted } from 'vue';
 import AnimeCard from './AnimeCard.vue';
 import AnimePagination from './AnimePagination.vue';
+import GenreTag from './GenreTag.vue';
 import { fetchAnimesByPopularity, fetchAnimesByGenre } from '@/repository/AnimeRepository';
 import { fetchGenres } from '@/repository/GenreRepository';
 import { AnimeGenre } from '@/model/AnimeGenre';
