@@ -1,9 +1,10 @@
 <template>
   <header id="header">
     <h1>Anime DB</h1>
+    <AnimeSearchBar id="search-bar" @onsearch="onSearch" />
   </header>
   <main>
-    <AnimeContainer />
+    <AnimeContainer :searchData="searchData" />
   </main>
   <footer id="footer">
     <p>Bruno Díaz Martín - 2024</p>
@@ -11,7 +12,15 @@
 </template>
 
 <script setup>
+import { ref } from 'vue';
 import AnimeContainer from './components/AnimeContainer.vue';
+import AnimeSearchBar from './components/AnimeSearchBar.vue';
+
+const searchData = ref();
+
+const onSearch = (query) => {
+  searchData.value = query;
+};
 </script>
 
 <style scoped>

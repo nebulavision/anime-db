@@ -43,13 +43,24 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, watch } from 'vue';
 import AnimeCard from './AnimeCard.vue';
 import AnimePagination from './AnimePagination.vue';
 import GenreTag from './GenreTag.vue';
-import { fetchAnimesByPopularity, fetchAnimesByGenre } from '@/repository/AnimeRepository';
+import {
+  fetchAnimesByPopularity,
+  fetchAnimesByGenre,
+  fetchAnimesByQuery,
+} from '@/repository/AnimeRepository';
 import { fetchGenres } from '@/repository/GenreRepository';
 import { AnimeGenre } from '@/model/AnimeGenre';
+
+const props = defineProps({
+  searchData: {
+    type: String,
+    reqired: false,
+  },
+});
 
 // ref() es una función de Composition API que se usa para crear una referencia reactiva.
 // Permite que una varaible sea reactiva y que Vue la observer para actualizar el DOM cuando
@@ -60,6 +71,28 @@ const activeTag = ref(0); // Guardara la referencia del id del género seleccion
 const fetching = ref(true);
 const totalPages = ref(0);
 const currentPage = ref(1);
+let inputTimeout;
+
+// Usamos watch para observar el cambio de una propiedad reactiva o computada
+watch(
+  () => props.searchData,
+  (newValue) => {
+    // Liampiamos el timeout
+    clearTimeout(inputTimeout);
+
+    // Creamos un timeout para que se llame a la API despues de 500ms
+    // desde que el usuario deja de escribir
+    inputTimeout = setTimeout(() => {
+      // Si el usuario escribio algo, buscamos
+      // y si lo borro todo, buscamos todos los animes populares
+      if (newValue) {
+        fetchAndUpdateAnimesByQuery(newValue);
+      } else {
+        fetchAndUpdateAnimes(0);
+      }
+    }, 500);
+  },
+);
 
 /**
  * Maneja el evento de cambio de página en la paginación.
@@ -67,6 +100,21 @@ const currentPage = ref(1);
  */
 const pageUpdated = (page) => {
   fetchAndUpdateAnimes(activeTag.value, page);
+};
+
+const fetchAndUpdateAnimesByQuery = async (query, page = 1) => {
+  try {
+    fetching.value = true;
+    const data = await fetchAnimesByQuery(query, page);
+
+    totalPages.value = data.pagination.last_visible_page;
+    currentPage.value = data.pagination.current_page;
+    animes.value = data.data;
+
+    fetching.value = false;
+  } catch (error) {
+    console.error('Error fetching animes:', error);
+  }
 };
 
 /**

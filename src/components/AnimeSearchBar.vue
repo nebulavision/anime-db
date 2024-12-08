@@ -12,7 +12,7 @@
       <input
         type="text"
         v-model="query"
-        @input="onSeacrh"
+        @input="onSearch"
         placeholder="Find animes..."
         class="input-search"
       />
@@ -27,7 +27,7 @@
   // Emitir eventos al componente padre
   const emit = defineEmits(['onsearch']);
 
-  const onSeacrh = () => {
+  const onSearch = () => {
     emit('onsearch', query.value);
   }
   </script>
