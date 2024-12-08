@@ -1,47 +1,49 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
-</script>
-
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
+  <header id="header">
+    <h1>Anime DB</h1>
   </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+  <main></main>
+  <footer id="footer">
+    <p>Bruno Díaz Martín - 2024</p>
+  </footer>
 </template>
 
+<script setup></script>
+
 <style scoped>
-header {
-  line-height: 1.5;
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;500;600;700&display=swap');
+
+
+#header {
+  background-image: url('../banner.jpg');
+  background-size: cover;
+  background-position: -5px;
+  opacity: 0.9;
+  height: 200px;
+  color: white;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
+main {
+  background-color: #17202a;
+  color: white;
+  flex: 1;
+  padding: 60px;
 }
 
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
+#footer {
+  padding: 10px;
+  background-color: #17202a;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 16px;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.5);
 }
 </style>
