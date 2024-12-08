@@ -31,7 +31,7 @@
       <div :style="{ visibility: fetching ? 'visible' : 'hidden' }" id="loader"></div>
     </div>
     <footer id="container-footer">
-      <Pagination
+      <AnimePagination
         :totalPages="totalPages"
         :currentPage="currentPage"
         :maxVisibleButtons="5"
@@ -45,6 +45,7 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import AnimeCard from './AnimeCard.vue';
+import AnimePagination from './AnimePagination.vue';
 import { fetchAnimesByPopularity, fetchAnimesByGenre } from '@/repository/AnimeRepository';
 import { fetchGenres } from '@/repository/GenreRepository';
 import { AnimeGenre } from '@/model/AnimeGenre';
