@@ -48,12 +48,6 @@ main {
   padding: 60px;
 }
 
-@media (max-width: 600px) {
-  main {
-    padding: 20px;
-  }
-}
-
 #footer {
   padding: 10px;
   background-color: #17202a;
