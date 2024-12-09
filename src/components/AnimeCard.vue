@@ -34,14 +34,14 @@ defineProps({
     type: Object,
     required: true,
   },
-})
+});
 
 /**
  * Maneja el evento de clic en el componente para mostrar el ID del anime.
  *
  * @param {number} animeId - El ID del anime representado por la instancia del componente.
  */
-const handleClick = (animeId) => console.log(animeId)
+const handleClick = (animeId) => console.log(animeId);
 </script>
 
 <style scoped>
@@ -98,6 +98,7 @@ const handleClick = (animeId) => console.log(animeId)
   bottom: 10px;
   left: 5px;
   width: 99%;
+  margin-bottom: 10px;
 }
 
 .card-body {
