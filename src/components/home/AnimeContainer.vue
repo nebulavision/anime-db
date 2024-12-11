@@ -30,7 +30,12 @@
           :anime -> Directiva para enlazar la propiedad anime para pasar el anime al componenete
           :[nombre_propiedad] es una abreviación para v-bind:[nombre-propiedad]
           -->
-      <AnimeCard class="card" v-for="anime in animes" :key="anime.mal_id" :anime="anime" />
+      <AnimeCard
+        class="card"
+        v-for="anime in animes"
+        :key="anime.mal_id"
+        :anime="anime"
+      />
       <div :style="{ visibility: fetching ? 'visible' : 'hidden' }" id="loader"></div>
     </div>
     <footer id="container-footer">
@@ -64,6 +69,7 @@ const props = defineProps({
     reqired: false,
   },
 });
+
 
 // ref() es una función de Composition API que se usa para crear una referencia reactiva.
 // Permite que una varaible sea reactiva y que Vue la observer para actualizar el DOM cuando

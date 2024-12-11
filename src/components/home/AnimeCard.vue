@@ -12,7 +12,21 @@
   * @component
 -->
 <template>
-  <section class="card" @click="handleClick(anime.mal_id)">
+  <!--
+  v-bind="$attrs"
+
+  Este atributo enlaza automáticamente todos los atributos no relacionados con las `props` del componente
+  (por ejemplo: class, id, data-*, etc.) al elemento en el que se utiliza.
+
+  Contexto:
+  - Cuando un componente recibe atributos no definidos en sus `props`, estos se colocan en `$attrs`.
+  - Usar v-bind="$attrs" permite propagar esos atributos al elemento deseado.
+
+  Nota:
+  Esto es útil para evitar advertencias como:
+  "Extraneous non-props attributes were passed to component..."
+-->
+  <section class="card" @click="handleClick(anime.mal_id)" v-bind="$attrs">
     <header class="card-header">
       <img class="card-header-image" :src="anime.images.webp.image_url" :alt="anime.title" />
       <div class="badge red">{{ anime.score ?? 0 }}</div>
@@ -26,22 +40,40 @@
       <p>{{ anime.title }}</p>
     </div>
   </section>
+  <!-- Modal -->
+  <!--
+        @click.self es un modificador del evento que indica que solo se activa si se hace
+        clic directamente en el elemento u no en sus hijo
+    -->
+  <article v-if="showModal" id="modal-overlay">
+    <div id="modal-container">
+      <AnimeDetail :anime="anime" @onclose="closeModal" />
+    </div>
+  </article>
 </template>
 
 <script setup>
-defineProps({
+import AnimeDetail from '@/components/anime_detail/AnimeDetail.vue';
+import { useModal } from '@/composables/useModal';
+
+const props = defineProps({
   anime: {
     type: Object,
     required: true,
   },
 });
 
+const { showModal, selectedAnime, openModal, closeModal } = useModal();
+
 /**
  * Maneja el evento de clic en el componente para mostrar el ID del anime.
  *
  * @param {number} animeId - El ID del anime representado por la instancia del componente.
  */
-const handleClick = (animeId) => console.log(animeId);
+const handleClick = (animeId) => {
+  selectedAnime.value = animeId;
+  openModal(props.anime);
+};
 </script>
 
 <style scoped>
@@ -117,4 +149,23 @@ const handleClick = (animeId) => console.log(animeId);
   line-height: 1.2rem;
   padding-bottom: 15px;
 }
+
+#modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+#modal-container {
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  max-width: 90%;
+}
+
 </style>
