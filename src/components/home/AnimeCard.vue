@@ -155,6 +155,7 @@ const handleClick = (animeId) => {
   top: 0;
   left: 0;
   width: 100vw;
+  height: 100vh;
   background: rgba(0, 0, 0, 0.8);
   display: flex;
   justify-content: center;
@@ -166,6 +167,7 @@ const handleClick = (animeId) => {
   border-radius: 15px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
   max-width: 90%;
+  height: 90%;
+  overflow: scroll;
 }
-
 </style>
